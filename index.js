@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import createError from "http-errors";
 import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/admin.js";
+import partnerTypeRoutes from "./routes/partnerType.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/admin", adminRoutes);
+app.use("/partnertype", partnerTypeRoutes);
 
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
