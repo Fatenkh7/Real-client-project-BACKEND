@@ -12,6 +12,7 @@ import partnerRoutes from "./routes/partner.js";
 import userRoutes from "./routes/user.js";
 import packageRoutes from "./routes/package.js";
 import bookingRoutes from "./routes/booking.js";
+import inboxRoutes from "./routes/inbox.js"
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use("/partner", partnerRoutes);
 app.use("/user", userRoutes);
 app.use("/package", packageRoutes);
 app.use("/booking", bookingRoutes);
+app.use("/inbox", inboxRoutes);
 
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
