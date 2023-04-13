@@ -12,7 +12,9 @@ import partnerRoutes from "./routes/partner.js";
 import userRoutes from "./routes/user.js";
 import packageRoutes from "./routes/package.js";
 import bookingRoutes from "./routes/booking.js";
+import webContentRoutes from "./routes/webContent.js";
 import inboxRoutes from "./routes/inbox.js"
+
 
 dotenv.config();
 
@@ -22,7 +24,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -39,6 +41,7 @@ app.use("/partner", partnerRoutes);
 app.use("/user", userRoutes);
 app.use("/package", packageRoutes);
 app.use("/booking", bookingRoutes);
+app.use("/content", webContentRoutes);
 app.use("/inbox", inboxRoutes);
 
 // create and error object,catch 404 and forward to error handler

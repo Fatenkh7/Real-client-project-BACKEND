@@ -14,7 +14,7 @@ const newsSchema = Schema(
       required: [true, "Please add a description"],
     },
   },
-  { collection: "news" }
+  { collection: "News" }
 );
 const Model = model("News", newsSchema);
 export default Model;

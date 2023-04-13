@@ -14,13 +14,13 @@ export async function getAll(req, res, next) {
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
-    const admin = await bookingModel.findById(ID);
-    if (!admin) {
+    const book = await bookingModel.findById(ID);
+    if (!book) {
       return res
         .status(404)
         .send({ success: false, message: "Booking not found" });
     }
-    res.status(200).send({ success: true, admin });
+    res.status(200).send({ success: true, book });
   } catch (error) {
     next(error);
   }
