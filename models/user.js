@@ -44,5 +44,5 @@ preferredAirlines:[{type: String}]
 /**
  * @description Data model for users account
  */
-const User = model('Users', user)
+const User = model('User', user)
 export default User;

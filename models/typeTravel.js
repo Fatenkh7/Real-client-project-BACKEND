@@ -26,10 +26,7 @@ const typeTravelSchema = Schema(
       required: [true, "Please add a description"],
     },
   },
-  {
-    collection: "typeTravel",
-    timestamps: true,
-  }
+  {collection: "TypeTravel",}
 );
-const TypeTravel = model("TypeTravel", typeTravelSchema);
-export default TypeTravel;
+const Model = model("TypeTravel", typeTravelSchema);
+export default Model;
