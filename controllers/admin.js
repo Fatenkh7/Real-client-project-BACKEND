@@ -11,19 +11,25 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the Admins by username
-export async function getByUsername(req, res, next) {
-  let { USERNAME } = req.params;
-  adminModel.findOne({ userName: USERNAME }, (err, response) => {
-    if (err) return next(err);
-    res.status(200).send({ success: true, response });
-  });
+//get the Admins by ID
+export async function getById(req, res, next) {
+  try {
+    const { ID } = req.params;
+    const admin = await adminModel.findById(ID);
+    if (!admin) {
+      return res.status(404).send({ success: false, message: 'Admin not found' });
+    }
+    res.status(200).send({ success: true, admin });
+  } catch (error) {
+    next(error);
+  }
 }
+
+
 
 //add admin
 export async function addAdmin(req, res, next) {
   try {
-    console.log(req.body);
     const { firstName, lastName, userName, email, password,isSuper } =
       req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,9 +52,9 @@ export async function addAdmin(req, res, next) {
 }
 
 //Update the admin
-export async function EditAdmin(req, res) {
+export async function editAdminById(req, res) {
   try {
-    let filter = { userName: req.params.USERNAME };
+    let filter = { _id: req.params.ID };
     let update = req.body;
 
     const salt = await bcrypt.genSaltSync(10);
@@ -58,17 +64,17 @@ export async function EditAdmin(req, res) {
       //for save it in the database
       new: true,
     });
-    res.status(200).json({ data: updateAdmin });
+    res.status(200).json({ message:"Update successfully",data: updateAdmin });
   } catch (err) {
     res.status(404).json({ message: err });
   }
 }
 
 //Delete an admin
-export async function deleteAdmin(req, res, next) {
+export async function deleteAdminById(req, res, next) {
   try {
     const removeAdmin = await adminModel.findOneAndDelete({
-        userName: req.params.USERNAME,
+        _id: req.params.ID,
     });
     res
       .status(200)
@@ -78,5 +84,5 @@ export async function deleteAdmin(req, res, next) {
   }
 }
 
-const controller = { addAdmin, getAll, deleteAdmin, getByUsername, EditAdmin };
+const controller = { addAdmin, getAll, deleteAdminById, getById, editAdminById };
 export default controller;
