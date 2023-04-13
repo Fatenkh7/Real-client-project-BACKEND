@@ -1,11 +1,11 @@
 import express from 'express';
 const router = express.Router();
-import { getAll, getByUsername, addAdmin, EditAdmin, deleteAdmin } from '../controllers/admin.js';
+import { getAll, getById, addAdmin, deleteAdminById, editAdminById } from '../controllers/admin.js';
 
 router.get("/", getAll);
-router.get("/:USERNAME", getByUsername);
+router.get("/:ID", getById);
 router.post("/add", addAdmin);
-router.patch("/:USERNAME", EditAdmin);
-router.delete("/:USERNAME", deleteAdmin);
+router.patch("/:ID", editAdminById);
+router.delete("/:ID", deleteAdminById);
 
 export default router;
