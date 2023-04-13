@@ -9,13 +9,13 @@ import bodyParser from "body-parser"
 import adminRoutes from "./routes/admin.js";
 import partnerTypeRoutes from "./routes/partnerType.js";
 import partner from "./routes/partner.js";
-
+import bookingMeetingRoutes from "./routes/bookingmeeting.js"
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
+app.use(bodyParser.urlencoded())
 app.use(express.json());
 app.use(cookieParser());
 
@@ -31,7 +31,7 @@ app.use("/typeTravel", typeTravelRoutes);
 app.use("/admin", adminRoutes);
 app.use("/partnertype", partnerTypeRoutes);
 app.use("/partner",partner);
-
+app.use("/bookingmeeting", bookingMeetingRoutes)
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
