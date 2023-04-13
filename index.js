@@ -10,6 +10,7 @@ import adminRoutes from "./routes/admin.js";
 import partnerTypeRoutes from "./routes/partnerType.js";
 import partner from "./routes/partner.js";
 
+
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,7 @@ app.use("/typeTravel", typeTravelRoutes);
 app.use("/admin", adminRoutes);
 app.use("/partnertype", partnerTypeRoutes);
 app.use("/partner",partner);
+
 
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
