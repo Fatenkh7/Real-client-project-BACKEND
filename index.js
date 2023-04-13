@@ -13,6 +13,7 @@ import userRoutes from "./routes/user.js";
 import packageRoutes from "./routes/package.js";
 import bookingRoutes from "./routes/booking.js";
 
+
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,7 @@ app.use("/partner", partnerRoutes);
 app.use("/user", userRoutes);
 app.use("/package", packageRoutes);
 app.use("/booking", bookingRoutes);
+
 
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
