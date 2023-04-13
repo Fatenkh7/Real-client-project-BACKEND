@@ -10,19 +10,23 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the partner type by title
-export async function getByTitle(req, res, next) {
-  let { TITLE } = req.params;
-  partnerTypeModel.findOne({  title: TITLE }, (err, response) => {
-    if (err) return next(err);
-    res.status(200).send({ success: true, response });
-  });
+//get the partner type by id
+export async function getById(req, res, next) {
+  try {
+    const { ID } = req.params;
+    const partnerType = await partnerTypeModel.findById(ID);
+    if (!partnerType) {
+      return res.status(404).send({ success: false, message: 'Partner type not found' });
+    }
+    res.status(200).send({ success: true, partnerType });
+  } catch (error) {
+    next(error);
+  }
 }
 
 //add partner type
-export async function add(req, res, next) {
+export async function addPartnerType(req, res, next) {
   try {
-    console.log(req.body);
     const { title} =
       req.body;
 
@@ -39,26 +43,26 @@ export async function add(req, res, next) {
 }
 
 //Update the partner type
-export async function Edit(req, res) {
+export async function editPartnerTypeById(req, res) {
   try {
-    let filter = { title: req.params.TITLE };
+    let filter = { _id: req.params.ID };
     let update = req.body;
 
     const updatePartnerType = await partnerTypeModel.findOneAndUpdate(filter, update, {
       //for save it in the database
       new: true,
     });
-    res.status(200).json({ data: updatePartnerType });
+    res.status(200).json({ message:"Update successfully",data: updatePartnerType });
   } catch (err) {
     res.status(404).json({ message: err });
   }
 }
 
 //Delete an the partner type
-export async function deletePartnerType(req, res, next) {
+export async function deletePartnerTypeById(req, res, next) {
   try {
     const removePartnerType = await partnerTypeModel.findOneAndDelete({
-        title: req.params.TITLE,
+        _id: req.params.ID,
     });
     res
       .status(200)
@@ -68,5 +72,5 @@ export async function deletePartnerType(req, res, next) {
   }
 }
 
-const controller = { add, getAll, deletePartnerType, getByTitle, Edit };
+const controller = { addPartnerType, getAll, deletePartnerTypeById, getById, editPartnerTypeById };
 export default controller;

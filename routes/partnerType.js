@@ -1,11 +1,11 @@
 import express from 'express';
 const router = express.Router();
-import { getAll, getByTitle, add, Edit, deletePartnerType } from '../controllers/partnerType.js';
+import { getAll, getById, addPartnerType, editPartnerTypeById, deletePartnerTypeById } from '../controllers/partnerType.js';
 
 router.get("/", getAll);
-router.get("/:TITLE", getByTitle);
-router.post("/add", add);
-router.patch("/:TITLE", Edit);
-router.delete("/:TITLE", deletePartnerType);
+router.get("/:ID", getById);
+router.post("/add", addPartnerType);
+router.patch("/:ID", editPartnerTypeById);
+router.delete("/:ID", deletePartnerTypeById);
 
 export default router;
