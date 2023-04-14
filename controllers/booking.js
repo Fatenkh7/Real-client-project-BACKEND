@@ -69,7 +69,7 @@ export async function editBookingById(req, res) {
   }
 }
 
-//Delete an admin
+//Delete a booking
 export async function deleteBookingById(req, res, next) {
   try {
     const removeBooking = await bookingModel.findOneAndDelete({
