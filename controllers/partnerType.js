@@ -1,6 +1,9 @@
 import partnerTypeModel from "../models/PartnerType.js";
 
-//get all the partner type
+/**
+ * @description get all the partner type
+ * @param {object} req 
+ */
 export async function getAll(req, res, next) {
   try {
     const response = await partnerTypeModel.find({});
@@ -10,7 +13,10 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the partner type by id
+/**
+ * @description get the partner type by id
+ * @param {object} req 
+ */
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
@@ -24,7 +30,10 @@ export async function getById(req, res, next) {
   }
 }
 
-//add partner type
+/**
+ * @description add partner type
+ * @param {object} req 
+ */
 export async function addPartnerType(req, res, next) {
   try {
     const { title} =
@@ -42,7 +51,10 @@ export async function addPartnerType(req, res, next) {
   }
 }
 
-//Update the partner type
+/**
+ * @description Update the partner type
+ * @param {object} req 
+ */
 export async function editPartnerTypeById(req, res) {
   try {
     let filter = { _id: req.params.ID };
@@ -58,7 +70,10 @@ export async function editPartnerTypeById(req, res) {
   }
 }
 
-//Delete an the partner type
+/**
+ * @description Delete an the partner type
+ * @param {object} req 
+ */
 export async function deletePartnerTypeById(req, res, next) {
   try {
     const removePartnerType = await partnerTypeModel.findOneAndDelete({

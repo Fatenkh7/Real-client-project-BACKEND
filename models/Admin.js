@@ -1,22 +1,21 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const adminSchema = Schema(
   {
     firstName: {
       type: String,
       required: [true, "Please enter your first name"],
-      minLength: [3, "the first name is too short!"],
-      maxLength: [25, "the first name is too long!"],
+      trim: true,
     },
     lastName: {
       type: String,
       required: [true, "Please enter your last name"],
-      minLength: [3, "the lastname is too short!"],
-      maxLength: [25, "the lastname is too long!"],
+      trim: true,
     },
     userName: {
       type: String,
       unique: true,
+      trim: true,
       required: [true, "Please enter your username"],
       minLength: [6, "the userame is too short!"],
       maxLength: [25, "the userame is too long!"],
@@ -24,9 +23,12 @@ const adminSchema = Schema(
     email: {
       type: String,
       unique: true,
+      trim: true,
       required: [true, "Please enter your mail"],
-      minLength: [15, "the mail is too short!"],
-      maxLength: [35, "the mail is too long!"],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please fill a valid email address",
+      ],
     },
     password: {
       type: String,
@@ -38,10 +40,17 @@ const adminSchema = Schema(
       type: Boolean,
       default: false,
     },
+    idImage: {
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+    },
   },
   {
     collection: "Admin",
   }
 );
+adminSchema.pre(["find", "findOne"], function () {
+  this.populate(["idImage"]);
+});
 const Model = model("Admin", adminSchema);
 export default Model;

@@ -5,12 +5,13 @@ const newsSchema = Schema(
   {
     title: {
       type: String,
+      trim: true,
       required: [true, "Please add the title"],
       trim: true,
-     
     },
     description: {
       type: String,
+      trim: true,
       required: [true, "Please add a description"],
     },
   },

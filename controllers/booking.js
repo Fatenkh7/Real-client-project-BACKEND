@@ -1,6 +1,9 @@
 import bookingModel from "../models/Booking.js";
 
-//get all the booking
+/**
+ * @description get all booking
+ * @param {object} req 
+ */
 export async function getAll(req, res, next) {
   try {
     const response = await bookingModel.find({});
@@ -10,7 +13,9 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the booking by ID
+/**
+ * @description get booking by id * @param {object} req 
+ */
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
@@ -26,8 +31,10 @@ export async function getById(req, res, next) {
   }
 }
 
-//add booking
-export async function addBooking(req, res, next) {
+/**
+ * @description add a booking
+ * @param {object} req 
+ */export async function addBooking(req, res, next) {
   try {
     const { User_id, Package_id, Partner_id, TypeTravel_id, price, currency } =
       req.body;
@@ -51,7 +58,10 @@ export async function addBooking(req, res, next) {
   }
 }
 
-//Update the booking
+/**
+ * @description update booking by id
+ * @param {object} req 
+ */
 export async function editBookingById(req, res) {
   try {
     let filter = { _id: req.params.ID };
@@ -69,8 +79,10 @@ export async function editBookingById(req, res) {
   }
 }
 
-//Delete an admin
-export async function deleteBookingById(req, res, next) {
+/**
+ * @description delete booking by id
+ * @param {object} req 
+ */export async function deleteBookingById(req, res, next) {
   try {
     const removeBooking = await bookingModel.findOneAndDelete({
       _id: req.params.ID,

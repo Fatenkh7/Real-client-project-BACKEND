@@ -16,7 +16,6 @@ const createUser = async (req, res) => {
       email,
       phone,
       title,
-      password,
       passportId,
       preferredAirlines,
       preferredDestinations,
@@ -50,7 +49,7 @@ const createUser = async (req, res) => {
 const updateUserById = async (req, res) => {
   try {
     let updatedUser = await user.updateOne(
-      { _id: req.params.id },
+      { _id: req.params.ID },
       { $set: req.body },
       {
         runValidators: true,
@@ -70,7 +69,7 @@ const updateUserById = async (req, res) => {
  */
 const deleteUserById = async (req, res) => {
   try {
-    await user.findByIdAndDelete({ _id: req.params.id })
+    await user.findByIdAndDelete({ _id: req.params.ID })
     .then(function(response){res
       .status(200)
       .send({ success: true, message: "User deleted successfully" });}, function(reject){
@@ -90,6 +89,8 @@ const deleteUserById = async (req, res) => {
 
 /**
  * @description get all users
+ * @param {object} req
+ * @return {object}
  */
 const getAllUser = async (req, res) => {
   try {
@@ -125,11 +126,12 @@ const getAllUser = async (req, res) => {
 };
 /**
  * @description get one user by id
- * @param req.params.id objectId
+ * @param {object} req 
+ * @param {string} req.params.idPartnerType
  */
 const getUserByParam = async (req, res) => {
   try {
-    user.find({email: req.params.email})
+    user.find({_id: req.params.ID})
     .then(
       function (response) {
         res
