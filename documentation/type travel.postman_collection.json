@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "c77e60d2-d806-4b6d-823e-933299d1b344",
+		"name": "type travel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25129623"
+	},
+	"item": [
+		{
+			"name": "post type travel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"aaaaaa\",\n    \"type\":\"aaaaaaaao\",\n    \"description\":\"aaaaaaaaaa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/typeTravel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"typeTravel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete type travel",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/typeTravel/6437c8f57309955c40e75db0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"typeTravel",
+						"6437c8f57309955c40e75db0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put type travel",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"dddd\",\n    \"type\":\"dddd\",\n    \"description\":\"dddd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/typeTravel/6437c8f57309955c40e75db0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"typeTravel",
+						"6437c8f57309955c40e75db0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all type travel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/typeTravel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"typeTravel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get type travel by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/typeTravel/6437c8f57309955c40e75db0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"typeTravel",
+						"6437c8f57309955c40e75db0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

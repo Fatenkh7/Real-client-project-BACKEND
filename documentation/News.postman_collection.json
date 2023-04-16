@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "2c3256b4-03ce-4eab-94fb-2ae4f43a283d",
+		"name": "News",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25129623"
+	},
+	"item": [
+		{
+			"name": "create news",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"qqqqqqq\",\n    \"description\":\"qqqqqqqqqq\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/news/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"news",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all news",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/news",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"news"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get news by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/news/6437de56b555522c3533715a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"news",
+						"6437de56b555522c3533715a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"iiiiiiiiii\",\n    \"description\":\"iiiiii\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/news/6437de56b555522c3533715a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"news",
+						"6437de56b555522c3533715a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete news",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/news/6437de56b555522c3533715a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"news",
+						"6437de56b555522c3533715a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
