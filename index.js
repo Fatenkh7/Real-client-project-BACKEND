@@ -8,6 +8,7 @@ import typeTravelRoutes from "./routes/typeTravel.js";
 import bodyParser from "body-parser";
 import adminRoutes from "./routes/admin.js";
 import partnerTypeRoutes from "./routes/partnerType.js";
+import bookingMeetingRoutes from "./routes/bookingmeeting.js"
 import partnerRoutes from "./routes/partner.js";
 import userRoutes from "./routes/user.js";
 import packageRoutes from "./routes/package.js";
@@ -21,7 +22,6 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/typeTravel", typeTravelRoutes);
 app.use("/admin", adminRoutes);
 app.use("/partnertype", partnerTypeRoutes);
+app.use("/bookingmeeting", bookingMeetingRoutes)
 app.use("/partner", partnerRoutes);
 app.use("/user", userRoutes);
 app.use("/package", packageRoutes);
@@ -48,6 +49,7 @@ app.use("/inbox", inboxRoutes);
 app.use("/image", imageRoutes);
 
 app.use("/uploads", express.static("./uploads"));
+
 // create and error object,catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
