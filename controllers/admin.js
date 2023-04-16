@@ -95,11 +95,29 @@ export async function deleteAdminById(req, res, next) {
   }
 }
 
-const controller = {
-  addAdmin,
-  getAll,
-  deleteAdminById,
-  getById,
-  editAdminById,
+export const login = async (req, res) => {
+  const email = req.body.userName;
+  const password = req.body.password;
+  try {
+    const loggingUser = await user.findOne({ userName: userName });
+    if (!loggingUser) {
+      return res.status(400).send("Invalid username");
+    }
+    const exist = await bcrypt.compare(password, loggingUser.password);
+    if (!exist) {
+      return res.status(400).send("Invalid password");
+    }
+    const token = jwt.sign(
+      { user_id: loggingUser.id, email },
+      process.env.JWT_SECRET,
+      { expiresIn: '4h'}
+    );
+    res.status(200).send({success:true, data:token, isSuper:loggingUser.isSuper});
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal server error");
+  }
 };
+
+const controller = { addAdmin, getAll, deleteAdminById, getById, editAdminById, login };
 export default controller;
