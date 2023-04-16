@@ -12,7 +12,7 @@ import {
 router.get("/", getAll);
 router.get("/:ID", getById);
 router.post("/add", imageHndel, addImage);
-router.patch("/:ID", editImageById);
+router.put("/:ID",imageHndel, editImageById);
 router.delete("/:ID", deleteImageById);
 
 export default router;

@@ -46,38 +46,39 @@ export async function addImage(req, res, next) {
 
 //update the image
 export async function editImageById(req, res, next) {
-    try {
-      const imageId = req.params.ID;
-      const { title } = req.body;
-      let imagePath;
-  
-      if (req.file) {
-        imagePath = req.file.path;
-      }
-  
-      const image = await imageModel.findById(imageId);
-  
-      if (!image) {
-        return res.status(404).json({ error: "Image not found" });
-      }
+  try {
+    const imageId = req.params.ID;
+    const { title } = req.body;
+    const imagePath = req.imagePath;
 
-      if (title) {
-        image.title = title;
-      }
-      if (imagePath) {
-        fs.unlinkSync(image.image);
-        image.image = imagePath;
-      }
-      await image.save();
-  
-      res
-        .status(200)
-        .json({ message: "Image updated successfully", updatedImage: image });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+    // Find the image in the database based on the ID
+    const imageToUpdate = await imageModel.findById(imageId);
+
+    if (!imageToUpdate) {
+      return res.status(404).json({ message: "Image not found" });
     }
+
+    // Delete the previous image
+    const previousImageFilePath = imageToUpdate.image;
+    fs.unlinkSync(previousImageFilePath);
+
+    // Update the title and image path of the image
+    imageToUpdate.title = title;
+    imageToUpdate.image = imagePath;
+
+    // Save the updated image to the database
+    await imageToUpdate.save();
+
+    res
+      .status(200)
+      .json({
+        message: "Image updated successfully",
+        updatedImage: imageToUpdate,
+      });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-  
+}
 
 // Delete an image
 export async function deleteImageById(req, res, next) {
