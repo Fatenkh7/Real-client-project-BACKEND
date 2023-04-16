@@ -9,7 +9,7 @@ const getAllBookMeetings = async (req, res) => {
 };
 const getBookMeetingById = async (req, res) => {
     try {
-        const bookMeeting = await bookMeetingModel.find({_id:req.params.id});
+        const bookMeeting = await bookMeetingModel.find({_id:req.params.ID});
         return res.status(200).send({ success: true, message:"book meeting data retrieved successfully", data:bookMeeting });
       } catch (err) {
         return res.status(412).send({error:true, message:"There is a problem retreiving the book meeting data"})
@@ -46,7 +46,7 @@ const addBookMeeting = async (req, res) => {
 const updateBookMeetingById = async (req, res) => {
     let body=req.body
     try{
-    const updatebookMeeting = await bookMeetingModel.findOneAndUpdate({_id:req.params.id}, {$set:body});
+    const updatebookMeeting = await bookMeetingModel.findOneAndUpdate({_id:req.params.ID}, {$set:body});
     return res.status(200).send({success:true, message:"The book meeting data has been updated"})
 }catch(error){
     console.log(error)
@@ -58,7 +58,7 @@ const deleteBookMeeting = async (req, res) => {
   try {
     const deletedbookMeeting = await bookMeetingModel
       .findOneAndDelete({
-        _id: req.params.id,
+        _id: req.params.ID,
       });
       deletedbookMeeting.then({
         function(success) {
