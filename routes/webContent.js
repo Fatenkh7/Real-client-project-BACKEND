@@ -1,9 +1,10 @@
 import express from 'express';
+import auth from "../middleware/auth.js";
 const router = express.Router();
 import { addWebContent, deleteWebContentById, editWebContentById, getAll, getById,} from '../controllers/webContent.js';
 router.get("/", getAll);
-router.get("/:ID", getById);
-router.post("/add", addWebContent);
-router.patch("/:ID", editWebContentById);
-router.delete("/:ID", deleteWebContentById);
+router.get("/:ID",auth(["superAdmin", "admin"]), getById);
+router.post("/add",auth(["superAdmin", "admin"]), addWebContent);
+router.patch("/:ID",auth(["superAdmin", "admin"]), editWebContentById);
+router.delete("/:ID",auth(["superAdmin", "admin"]), deleteWebContentById);
 export default router;

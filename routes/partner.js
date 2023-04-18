@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from "../middleware/auth.js";
 const router = express.Router();
 import { addPartner, deletePartnerById, editPartnerById,getAll,getById } from '../controllers/partner.js';
 router.get("/",auth(["superAdmin", "admin"]), getAll);

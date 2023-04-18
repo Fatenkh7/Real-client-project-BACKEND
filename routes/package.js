@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from "../middleware/auth.js";
 const router = express.Router();
 import packageControllers from "../controllers/package.js"
 router.get("/",auth(["superAdmin", "admin"]), packageControllers.getAllPackages);

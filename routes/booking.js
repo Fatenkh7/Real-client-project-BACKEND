@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from "../middleware/auth.js";
 const router = express.Router();
 import { addBooking, deleteBookingById, editBookingById, getAll, getById,} from '../controllers/booking.js';
 router.get("/", auth(["superAdmin", "admin"]), getAll);

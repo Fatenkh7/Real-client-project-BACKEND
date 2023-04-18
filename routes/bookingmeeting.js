@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from "../middleware/auth.js";
 const router = express.Router();
 import bookingMeetingSchema from "../controllers/bookingmeeting.js"
 router.get("/",auth(["superAdmin", "admin"]), bookingMeetingSchema.getAllBookMeetings);
