@@ -1,34 +1,44 @@
 import { Schema, model } from "mongoose";
 
-const packageSchema=new Schema({
-    packageTitle:{
-        type:String,
-        required:true,
+const packageSchema = new Schema(
+  {
+    packageTitle: {
+      type: String,
+      required: true,
     },
-    idImage:{
-        type:Schema.Types.ObjectId,
-        required:true,
-        //ref:"Image"
+    idImage: {
+      type: Schema.Types.ObjectId,
+      //required: true,
+      //ref:"Image"
     },
-    description:{
-        type:String,
-        required:true,
+    description: {
+      type: String,
+      required: true,
     },
-    locations:[{
-        type:String,
-        required:true
-    }],
-    duration:{
-        type:String
+    locations: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+    duration: {
+      type: String,
     },
-    isCustomized:{
-        type:Boolean
+    isCustomized: {
+      type: Boolean,
     },
-    idCustomer:{
-        type:Schema.Types.ObjectId,
-        required:function() { return this.isCustomized === true; },
-        //ref:"User"
-    }
-}, {collection:"Package"});
-const Package=model("Package", packageSchema);
+    idCustomer: {
+      type: Schema.Types.ObjectId,
+      required: function () {
+        return this.isCustomized === true;
+      },
+      ref: "User",
+    },
+  },
+  { collection: "Package" }
+);
+packageSchema.pre(["find", "findOne"], function () {
+  this.populate(["idImage", "idCustomer"]);
+});
+const Package = model("Package", packageSchema);
 export default Package;

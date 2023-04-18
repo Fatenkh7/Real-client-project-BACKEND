@@ -1,6 +1,9 @@
 import webContentModel from "../models/WebContent.js";
 
-//get all the web content
+/**
+ * @description get all the web content
+ * @param req.body JSON
+ */
 export async function getAll(req, res, next) {
   try {
     const response = await webContentModel.find({});
@@ -10,7 +13,10 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the web content by ID
+/**
+ * @description get web content by id
+ * @param req.body JSON
+ */
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
@@ -26,7 +32,10 @@ export async function getById(req, res, next) {
   }
 }
 
-//add web content
+/**
+ * @description add web content
+ * @param req.body JSON
+ */
 export async function addWebContent(req, res, next) {
   try {
     const { key, value } = req.body;
@@ -46,7 +55,10 @@ export async function addWebContent(req, res, next) {
   }
 }
 
-//Update the web content
+/**
+ * @description update web content by id
+ * @param req.body JSON
+ */
 export async function editWebContentById(req, res) {
   try {
     let filter = { _id: req.params.ID };
@@ -68,7 +80,10 @@ export async function editWebContentById(req, res) {
   }
 }
 
-//Delete an web content
+/**
+ * @description delete web content by id
+ * @param req.body JSON
+ */
 export async function deleteWebContentById(req, res, next) {
   try {
     const removeContent = await webContentModel.findOneAndDelete({

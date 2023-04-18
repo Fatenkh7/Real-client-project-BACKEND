@@ -2,19 +2,19 @@ import { Schema, model } from "mongoose";
 
 const BookingSchema = Schema(
   {
-    User_id: {
+    idUser: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    Package_id: {
+    idPackage: {
       type: Schema.Types.ObjectId,
       ref: "Package",
     },
-    Partner_id: {
+    idPartner: {
       type: Schema.Types.ObjectId,
       ref: "Partner",
     },
-    TypeTravel_id: {
+    idTypeTravel: {
       type: Schema.Types.ObjectId,
       ref: "TypeTravel",
     },
@@ -25,6 +25,7 @@ const BookingSchema = Schema(
     },
     currency: {
       type: String,
+      trim: true,
       required: [true, "Please enter the currency name"],
     },
   },
@@ -33,5 +34,8 @@ const BookingSchema = Schema(
     timestamps: true,
   }
 );
+BookingSchema.pre(["find", "findOne"], function () {
+  this.populate(["idUser", "idPackage", "idPartner", "idTypeTravel"]);
+});
 const Model = model("Booking", BookingSchema);
 export default Model;

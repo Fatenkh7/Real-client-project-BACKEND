@@ -1,33 +1,37 @@
 import mongoose from "mongoose";
-const {Schema, model} = mongoose;
+const { Schema, model } = mongoose;
 
-const inboxschema = new Schema({
+const inboxschema = new Schema(
+  {
     firstName: {
-        type: String,
-        required: [true, "Please enter your first name"],
-        minLength: [3, "the first name is too short!"],
-        maxLength: [25, "the first name is too long!"],
-      },
-      lastName: {
-        type: String,
-        required: [true, "Please enter your last name"],
-        minLength: [3, "the lastname is too short!"],
-        maxLength: [25, "the lastname is too long!"],
-      },
-      email: {
-        type: String,
-        unique: true,
-        required: [true, "Please enter your mail"],
-        minLength: [15, "the mail is too short!"],
-        maxLength: [35, "the mail is too long!"],
-      },
-    feedback:{
-        type:String,
-        required: [true, "Please enter the feedback for the inbox"]
-    }
-  
-},{
-collection: 'Inbox'
-});
-const Model = model('Inbox', inboxschema);
+      type: String,
+      trim: true,
+      required: [true, "Please enter your first name"],
+    },
+    lastName: {
+      type: String,
+      trim: true,
+      required: [true, "Please enter your last name"],
+    },
+    email: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: [true, "Please enter your mail"],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please fill a valid email address",
+      ],
+    },
+    feedback: {
+      type: String,
+      trim: true,
+      required: [true, "Please enter your feedback"],
+    },
+  },
+  {
+    collection: "Inbox",
+  }
+);
+const Model = model("Inbox", inboxschema);
 export default Model;

@@ -7,16 +7,16 @@ const partnerSchema = Schema(
     company: {
       type: String,
       unique: true,
+      trim: true,
       required: [true, "Please enter the company name"],
       minLength: [3, "the company name is too short!"],
-      maxLength: [25, "the company name is too long!"],
     },
     description: {
       type: String,
+      trim: true,
       minLength: [3, "the description is too short!"],
-      maxLength: [25, "the description is too long!"],
     },
-    PartnerType_id: {
+    idPartnerType: {
       type: Schema.Types.ObjectId,
       ref: "PartnerType",
     },
@@ -26,6 +26,7 @@ const partnerSchema = Schema(
     },
     link: {
       type: String,
+      trim: true,
       required: [true, "Please enter the company's link"],
     },
   },
@@ -33,7 +34,8 @@ const partnerSchema = Schema(
     collection: "Partner",
   }
 );
-
+partnerSchema.pre(["find", "findOne"], function () {
+  this.populate(["idPartnerType"]);
+});
 const PartnerModel = model("Partner", partnerSchema);
-
 export default PartnerModel;

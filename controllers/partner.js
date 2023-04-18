@@ -1,6 +1,9 @@
 import partnerModel from "../models/Partner.js";
 
-//get all the partner
+/**
+ * @description get all partners
+ * @param {object} req 
+ */
 export async function getAll(req, res, next) {
   try {
     const response = await partnerModel.find({});
@@ -10,7 +13,10 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the partner  by id
+/**
+ * @description get the partner by id
+ * @param {object} req 
+ */
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
@@ -24,21 +30,22 @@ export async function getById(req, res, next) {
   }
 }
 
-//add partner
+/**
+ * @description add a partner
+ * @param {object} req 
+ */
 export async function addPartner(req, res, next) {
   try {
-    const { company, description, PartnerType_id, rate, link } = req.body;
+    const { company, description, idPartnerType, rate, link } = req.body;
 
     const newPartner = new partnerModel({
       company,
       description,
-      PartnerType_id,
+      idPartnerType,
       rate,
       link,
     });
-
     await newPartner.save();
-
     res
       .status(201)
       .json({ message: "Partner  created successfully", newPartner });
@@ -47,7 +54,10 @@ export async function addPartner(req, res, next) {
   }
 }
 
-//Update the partner
+/**
+ * @description update the partner by id
+ * @param {object} req 
+ */
 export async function editPartnerById(req, res) {
   try {
     let filter = { _id: req.params.ID };
@@ -63,7 +73,10 @@ export async function editPartnerById(req, res) {
   }
 }
 
-//Delete an the partner
+/**
+ * @description delete the partner by id
+ * @param {object} req 
+ */
 export async function deletePartnerById(req, res, next) {
   try {
     const removePartner = await partnerModel.findOneAndDelete({

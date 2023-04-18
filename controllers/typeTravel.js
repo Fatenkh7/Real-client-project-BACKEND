@@ -1,6 +1,8 @@
 import Model from "../models/typeTravel.js";
-
-//get all typeTravel
+/**
+ * @description get all typeTravel
+ * @param {object} req 
+ */
 export async function getAllTypeTravel(req, res, next) {
   try {
     const response = await Model.find();
@@ -11,11 +13,14 @@ export async function getAllTypeTravel(req, res, next) {
   }
 }
 
-//get a typeTravel by id
+/**
+ * @description get a typeTravel by id
+ * @param {object} req 
+ */
 async function getByIdTypeTravel(req, res, next) {
-  let { id } = req.params;
+  let { ID } = req.params;
   try {
-    const response = await Model.findOne({ _id: id });
+    const response = await Model.findOne({ _id: ID });
     console.log(response);
     res.status(200).send({ success: true, response });
   } catch (error) {
@@ -23,22 +28,10 @@ async function getByIdTypeTravel(req, res, next) {
   }
 }
 
-//create a new typeTravel
-//  post(req, res, next) {
-//   let body = req.body;
-
-//   let doc = new Model(body);
-//   doc
-//     .save()
-//     .then((response) => {
-//       console.log(response);
-//       res.status(200).send({ success: true, response });
-//     })
-//     .catch((error) => {
-//       res.status(500).send(error);
-//     });
-// }
-
+/**
+ * @description create a type travel
+ * @param {object} req 
+ */
 export const postTypeTravel = async (req, res) => {
   try {
     console.log(req.body, "jdhfbhjf")
@@ -51,52 +44,31 @@ export const postTypeTravel = async (req, res) => {
   }
 };
 
-//update a typeTravel
-// async put(req, res) {
-//   let { id } = req.params;
-//   let body = req.body;
-//   Model.findOneAndUpdate({ _id: id }, { $set: body })
-//     .then((response) => {
-//       console.log(response);
-//       res.status(200).send({ success: true, response });
-//     })
-//     .catch((error) => {
-//       res.status(500).send(error);
-//     });
-// }
-
+/**
+ * @description update a type Travel by id
+ * @param {object} req 
+ */
 async function putTypeTravel(req, res) {
-  let { id } = req.params;
+  let { ID } = req.params;
   let body = req.body;
 
   try {
-    let response = await Model.findOneAndUpdate({ _id: id }, { $set: body });
+    let response = await Model.findOneAndUpdate({ _id: ID }, { $set: body });
     console.log(response);
     res.status(200).send({ success: true, response });
   } catch (error) {
     res.status(500).send(error);
   }
 }
-
-//delete a typeTravel
-//    delete(req, res) {
-//     let { id } = req.params;
-//     Model.findOneAndDelete({ _id: id })
-//       .then((response) => {
-//         console.log(response);
-//         res.status(200).send({ success: true, response });
-//       })
-//       .catch((error) => {
-//         res.status(500).send(error);
-//       });
-//   }
-// }
-
+/**
+ * @description delete a typeTravel by id
+ * @param {object} req 
+ */
 export async function deleteTypeTravel(req, res) {
-  let { id } = req.params;
+  let { ID } = req.params;
 
   try {
-    let response = await Model.findOneAndDelete({ _id: id });
+    let response = await Model.findOneAndDelete({ _id: ID });
     console.log(response);
     res.status(200).send({ success: true, response });
   } catch (error) {
