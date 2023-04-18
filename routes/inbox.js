@@ -1,5 +1,6 @@
 import express from "express";
 import Controllers from "../controllers/inbox.js";
+import auth from "../middleware/auth.js";
 const router = express.Router();
 router.get("/",auth(["superAdmin", "admin"]), Controllers.getAllInbox);
 router.get("/:ID",auth(["superAdmin", "admin"]), Controllers.getByIdInbox);
