@@ -7,7 +7,7 @@ export const authorize=(role = []) =>{
  
         (req, res, next) => {
             try{
-            let token=req.body.Authorization||"none"
+            let token=req.headers.authorization.split(" ")[1]||"none"
             let decoded=jwt.verify(token, process.env.JWT_SECRET);
             if(!decoded){
                 return res.status(401).json({ message: 'Unauthorized' });
