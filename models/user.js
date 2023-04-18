@@ -13,6 +13,10 @@ const user = new Schema(
       required: [true, "Last name cann't be empty"],
       trim: true,
     },
+    isMember:{
+      type:Boolean,
+      default:false
+    },
     email: {
       type: String,
       trim: true,
@@ -25,7 +29,9 @@ const user = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return this.isMember === true;
+      },
       minLength: [8, "the password is too short!"],
       maxLength: [80, "the password is too long!"],
     },
