@@ -5,12 +5,13 @@ const webContentSchema = Schema(
   {
     key: {
       type: String,
+      trim: true,
       required: [true, "Please add the key"],
-     
     },
     value: {
       type: String,
-      required: [true, "Please add a the value"],
+      trim: true,
+      required: [true, "Please add a value"],
     },
   },
   { collection: "WebContent" }

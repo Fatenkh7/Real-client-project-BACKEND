@@ -2,9 +2,9 @@ import express from 'express';
 const router = express.Router();
 import bookingMeetingSchema from "../controllers/bookingmeeting.js"
 router.get("/", bookingMeetingSchema.getAllBookMeetings);
-router.get("/:id", bookingMeetingSchema.getBookMeetingById);
-router.post("/", bookingMeetingSchema.addBookMeeting);
-router.patch("/:id", bookingMeetingSchema.updateBookMeetingById);
-router.delete("/:id", bookingMeetingSchema.deleteBookMeeting);
+router.get("/:ID", bookingMeetingSchema.getBookMeetingById);
+router.post("/add", bookingMeetingSchema.addBookMeeting);
+router.patch("/:ID", bookingMeetingSchema.updateBookMeetingById);
+router.delete("/:ID", bookingMeetingSchema.deleteBookMeeting);
 
 export default router;
