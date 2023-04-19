@@ -9,10 +9,10 @@ dotenv.config();
  */
 const createUser = async (req, res) => {
   try {
-     let hashed = await bcrypt.hashSync(req.body.password, 10);
     const {
       firstName,
       lastName,
+      isMember,
       email,
       phone,
       title,
@@ -20,20 +20,38 @@ const createUser = async (req, res) => {
       preferredAirlines,
       preferredDestinations,
     } = req.body;
-    let newUser = new user({
-      firstName,
-      lastName,
-      email,
-      phone,
-      title,
-      password:hashed,
-      passportId,
-      preferredAirlines,
-      preferredDestinations,
-    });
+    let newUser;
+    if(req.body.password){
+      let hashed = await bcrypt.hashSync(req.body.password,10);
+       newUser = new user({
+        firstName,
+        lastName,
+        email,
+        isMember,
+        phone,
+        title,
+        password:hashed,
+        passportId,
+        preferredAirlines,
+        preferredDestinations,
+      });
+    } else{
+      newUser = new user({
+        firstName,
+        lastName,
+        email,
+        isMember,
+        phone,
+        title,
+        passportId,
+        preferredAirlines,
+        preferredDestinations,
+      });
+    }
     await newUser.save();
     res.status(201).send({ success: true, message: "User added successfully" });
   } catch (error) {
+    console.log(error)
     res.status(410).send({
       error: true,
       message: "There is a problem with Saving the data",
