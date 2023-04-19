@@ -7,5 +7,5 @@ router.get("/",auth(["user"]), userControllers.getAllUser);
 router.get("/:ID",auth(["user"]), userControllers.getUserByParam);
 router.put("/:ID",auth(["user"]),userControllers.updateUserById);
 router.delete("/:ID",auth(["user"]),userControllers.deleteUserById);
-router.post("/login",auth(["user"]),userControllers.login, userControllers.deleteUserById);
+router.post("/login",userControllers.login);
 export default router;
