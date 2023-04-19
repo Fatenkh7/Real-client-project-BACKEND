@@ -1,6 +1,6 @@
 import adminModel from "../models/Admin.js";
 import bcrypt from "bcryptjs";
-
+import jwt from "jsonwebtoken"
 /**
  * @description get all admins
  * @param {object} req
@@ -96,10 +96,10 @@ export async function deleteAdminById(req, res, next) {
 }
 
 export const login = async (req, res) => {
-  const email = req.body.userName;
+  const userName = req.body.userName;
   const password = req.body.password;
   try {
-    const loggingUser = await user.findOne({ userName: userName });
+    const loggingUser = await adminModel.findOne({ userName: userName });
     if (!loggingUser) {
       return res.status(400).send("Invalid username");
     }
@@ -108,11 +108,11 @@ export const login = async (req, res) => {
       return res.status(400).send("Invalid password");
     }
     const token = jwt.sign(
-      { user_id: loggingUser.id, email },
+      { user_id: loggingUser.id, userName },
       process.env.JWT_SECRET,
       { expiresIn: '4h'}
     );
-    res.status(200).send({success:true, data:token, isSuper:loggingUser.isSuper});
+    res.status(200).send({success:true, data:token, role:"user"});
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error");
