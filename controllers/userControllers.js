@@ -1,4 +1,4 @@
-import user from "../models/user.js";
+import user from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -76,13 +76,11 @@ const updateUserById = async (req, res) => {
     );
     res.status(200).send({ success: true, message: "user data updated" });
   } catch (error) {
-    res
-      .status(412)
-      .send({
-        error: true,
-        message: "There was a problem updating the data",
-        data: error,
-      });
+    res.status(412).send({
+      error: true,
+      message: "There was a problem updating the data",
+      data: error,
+    });
   }
 };
 
@@ -107,13 +105,11 @@ const deleteUserById = async (req, res) => {
       }
     );
   } catch (error) {
-    res
-      .status(412)
-      .send({
-        error: true,
-        message: "There was a problem delete the user",
-        data: error,
-      });
+    res.status(412).send({
+      error: true,
+      message: "There was a problem delete the user",
+      data: error,
+    });
   }
 };
 
@@ -184,9 +180,9 @@ const login = async (req, res) => {
   const password = req.body.password;
   try {
     const loggingUser = await user.findOne({ email: email });
-    let docMember=loggingUser.isMember||false;
-    let docConfirm=loggingUser.isConfirmed||false
-    if (!loggingUser ||!docMember || !docConfirm) {
+    let docMember = loggingUser.isMember || false;
+    let docConfirm = loggingUser.isConfirmed || false;
+    if (!loggingUser || !docMember || !docConfirm) {
       return res.status(400).send("No registred user matched the sent email");
     }
     const exist = await bcrypt.compare(password, loggingUser.password);
@@ -198,7 +194,9 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "4h" }
     );
-    res.status(200).send({success:true, data:token, id:loggingUser._id, role:"user"});
+    res
+      .status(200)
+      .send({ success: true, data: token, id: loggingUser._id, role: "user" });
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error");
