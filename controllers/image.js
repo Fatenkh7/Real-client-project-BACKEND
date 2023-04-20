@@ -2,7 +2,9 @@ import imageModel from "../models/Image.js";
 import fs from "fs";
 import path from "path";
 
-//get all the Image
+/**
+ * @description get all images
+ */
 export async function getAll(req, res, next) {
   try {
     const response = await imageModel.find({});
@@ -12,7 +14,10 @@ export async function getAll(req, res, next) {
   }
 }
 
-//get the Image by ID
+/**
+ * @description get an image by id
+ * @param {String} req.params.ID
+ */
 export async function getById(req, res, next) {
   try {
     const { ID } = req.params;
@@ -28,8 +33,10 @@ export async function getById(req, res, next) {
   }
 }
 
-//add Image
-export async function addImage(req, res, next) {
+/**
+ * @description add a new image
+ * @param {object} req.body
+ */export async function addImage(req, res, next) {
   try {
     const newImage = new imageModel({
       title: req.body.title,
@@ -44,8 +51,11 @@ export async function addImage(req, res, next) {
   }
 }
 
-//update the image
-export async function editImageById(req, res, next) {
+/**
+ * @description update an image by id
+ * @param {object} req.body
+ * @param {String} req.params.ID
+ */export async function editImageById(req, res, next) {
   try {
     const imageId = req.params.ID;
     const { title } = req.body;
@@ -68,7 +78,6 @@ export async function editImageById(req, res, next) {
 
     // Save the updated image to the database
     await imageToUpdate.save();
-
     res
       .status(200)
       .json({
@@ -80,7 +89,10 @@ export async function editImageById(req, res, next) {
   }
 }
 
-// Delete an image
+/**
+ * @description delete a booking meeting by id
+ * @param {String} req.params.ID
+ */
 export async function deleteImageById(req, res, next) {
   try {
     const { ID } = req.params;

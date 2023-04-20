@@ -2,7 +2,6 @@ import { response } from "express";
 import Model from "../models/Inbox.js";
 /**
  * @description get all inbox
- * @param {object} req 
  */
 export async function getAllInbox(req, res, next) {
   try {
@@ -14,8 +13,8 @@ export async function getAllInbox(req, res, next) {
   }
 }
 /**
- * @description get inboxby id
- * @param {object} req 
+ * @description get inbox by id
+ * @param {String} req.params.ID
  */
 export async function getByIdInbox(req, res, next) {
   let { ID } = req.params;
@@ -29,7 +28,7 @@ export async function getByIdInbox(req, res, next) {
 }
 /**
  * @description add a new inbox
- * @param {object} req 
+ * @param {object} req.body
  */
 export const postInbox = async (req, res) => {
   try {
@@ -44,7 +43,8 @@ export const postInbox = async (req, res) => {
 };
 /**
  * @description update inbox by id
- * @param {object} req 
+ * @param {object} req.body
+ * @param {String} req.params.ID
  */
 export async function putInbox(req, res) {
   const { ID } = req.params
@@ -60,7 +60,7 @@ export async function putInbox(req, res) {
 }
 /**
  * @description delete inbox by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 export async function deleteInbox(req, res) {
   let { ID } = req.params;

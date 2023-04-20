@@ -2,7 +2,6 @@ import partnerModel from "../models/Partner.js";
 
 /**
  * @description get all partners
- * @param {object} req 
  */
 export async function getAll(req, res, next) {
   try {
@@ -15,7 +14,7 @@ export async function getAll(req, res, next) {
 
 /**
  * @description get the partner by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 export async function getById(req, res, next) {
   try {
@@ -32,7 +31,7 @@ export async function getById(req, res, next) {
 
 /**
  * @description add a partner
- * @param {object} req 
+ * @param {object} req.body
  */
 export async function addPartner(req, res, next) {
   try {
@@ -56,7 +55,8 @@ export async function addPartner(req, res, next) {
 
 /**
  * @description update the partner by id
- * @param {object} req 
+ * @param {object} req.body 
+ * @param {String} req.params.ID 
  */
 export async function editPartnerById(req, res) {
   try {
@@ -75,7 +75,7 @@ export async function editPartnerById(req, res) {
 
 /**
  * @description delete the partner by id
- * @param {object} req 
+ * @param {String} req.params.ID 
  */
 export async function deletePartnerById(req, res, next) {
   try {

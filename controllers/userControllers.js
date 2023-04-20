@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 /**
  * @description user sign up
- * @param req.body JSON
+ * @param {Object} req.body
  */
 const createUser = async (req, res) => {
   try {
@@ -61,8 +61,9 @@ const createUser = async (req, res) => {
 };
 
 /**
- * @description update user information sign up
- * @param req.params.id objectId
+ * @description update user information by id
+ * @param {String} req.params.id
+ * @param {Object} req.body
  */
 const updateUserById = async (req, res) => {
   try {
@@ -82,8 +83,8 @@ const updateUserById = async (req, res) => {
 };
 
 /**
- * @description delete user
- * @param req.params.id objectId
+ * @description delete user by id
+ * @param {String} req.params.id
  */
 const deleteUserById = async (req, res) => {
   try {
@@ -107,8 +108,6 @@ const deleteUserById = async (req, res) => {
 
 /**
  * @description get all users
- * @param {object} req
- * @return {object}
  */
 const getAllUser = async (req, res) => {
   try {
@@ -144,8 +143,7 @@ const getAllUser = async (req, res) => {
 };
 /**
  * @description get one user by id
- * @param {object} req 
- * @param {string} req.params.idPartnerType
+ * @param {string} req.params.ID
  */
 const getUserByParam = async (req, res) => {
   try {
@@ -179,13 +177,19 @@ const getUserByParam = async (req, res) => {
       });
   }
 };
+/**
+ * @description get one user by id
+ * @param {Object} req.body
+ */
 const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
     const loggingUser = await user.findOne({ email: email });
-    if (!loggingUser) {
-      return res.status(400).send("Invalid username");
+    let docMember=loggingUser.isMember||false;
+    let docConfirm=loggingUser.isConfirmed||false
+    if (!loggingUser ||!docMember || !docConfirm) {
+      return res.status(400).send("No registred user matched the sent email");
     }
     const exist = await bcrypt.compare(password, loggingUser.password);
     if (!exist) {
@@ -196,7 +200,7 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '4h'}
     );
-    res.status(200).send({success:true, data:token});
+    res.status(200).send({success:true, data:token, id:loggingUser._id, role:"user"});
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error");

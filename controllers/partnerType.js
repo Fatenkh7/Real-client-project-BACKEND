@@ -2,7 +2,6 @@ import partnerTypeModel from "../models/PartnerType.js";
 
 /**
  * @description get all the partner type
- * @param {object} req 
  */
 export async function getAll(req, res, next) {
   try {
@@ -15,7 +14,7 @@ export async function getAll(req, res, next) {
 
 /**
  * @description get the partner type by id
- * @param {object} req 
+ * @param {String} req.params.ID 
  */
 export async function getById(req, res, next) {
   try {
@@ -32,19 +31,16 @@ export async function getById(req, res, next) {
 
 /**
  * @description add partner type
- * @param {object} req 
+ * @param {object} req.body
  */
 export async function addPartnerType(req, res, next) {
   try {
     const { title} =
       req.body;
-
     const newPartnerType = new partnerTypeModel({
         title
     });
-
     await newPartnerType.save();
-
     res.status(201).json({ message: "Partner type created successfully", newPartnerType });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -52,8 +48,8 @@ export async function addPartnerType(req, res, next) {
 }
 
 /**
- * @description Update the partner type
- * @param {object} req 
+ * @description Update the partner type by id
+ * @param {String} req.params.ID
  */
 export async function editPartnerTypeById(req, res) {
   try {
@@ -71,8 +67,8 @@ export async function editPartnerTypeById(req, res) {
 }
 
 /**
- * @description Delete an the partner type
- * @param {object} req 
+ * @description Delete a partner type
+ * @param {String} req.params.ID 
  */
 export async function deletePartnerTypeById(req, res, next) {
   try {

@@ -2,7 +2,6 @@ import Model from "../models/News.js";
 
 /**
  * @description get all news
- * @param {object} req
  */
 export async function getAllNews(req, res, next) {
   try {
@@ -16,7 +15,7 @@ export async function getAllNews(req, res, next) {
 
 /**
  * @description get a news by id
- * @param {object} req
+ * @param {String} req.params.ID
  */
 export async function getByIdNews(req, res, next) {
   let { ID} = req.params;
@@ -31,7 +30,7 @@ export async function getByIdNews(req, res, next) {
 
 /**
  * @description add a news
- * @param {object} req
+ * @param {object} req.body
  */
 export const postNews = async (req, res) => {
   try {
@@ -46,7 +45,8 @@ export const postNews = async (req, res) => {
 };
 /**
  * @description update news by id
- * @param {object} req 
+ * @param {object} req.body
+ * @param {String} req.params.ID
  */
 export async function putNews(req, res) {
   let { ID } = req.params;
@@ -63,7 +63,7 @@ export async function putNews(req, res) {
 
 /**
  * @description delete a news by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 export async function deleteNews(req, res) {
   let { ID } = req.params;
