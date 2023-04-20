@@ -15,7 +15,7 @@ export async function getAllTypeTravel(req, res, next) {
 
 /**
  * @description get a typeTravel by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 async function getByIdTypeTravel(req, res, next) {
   let { ID } = req.params;
@@ -30,7 +30,7 @@ async function getByIdTypeTravel(req, res, next) {
 
 /**
  * @description create a type travel
- * @param {object} req 
+ * @param {object} req.body
  */
 export const postTypeTravel = async (req, res) => {
   try {
@@ -46,7 +46,8 @@ export const postTypeTravel = async (req, res) => {
 
 /**
  * @description update a type Travel by id
- * @param {object} req 
+ * @param {object} req.body
+ * @param {String} req.params.ID
  */
 async function putTypeTravel(req, res) {
   let { ID } = req.params;
@@ -62,7 +63,7 @@ async function putTypeTravel(req, res) {
 }
 /**
  * @description delete a typeTravel by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 export async function deleteTypeTravel(req, res) {
   let { ID } = req.params;

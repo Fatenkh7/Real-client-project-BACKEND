@@ -1,7 +1,6 @@
 import packageModel from "../models/Package.js";
 /**
  * @description get all packages
- * @param {object} req 
  */
 const getAllPackages = async (req, res) => {
     try {
@@ -13,7 +12,7 @@ const getAllPackages = async (req, res) => {
 };
 /**
  * @description get package by id
- * @param {object} req 
+ * @param {String} req.params.ID 
  */
 const getPackageById = async (req, res) => {
     try {
@@ -25,7 +24,7 @@ const getPackageById = async (req, res) => {
 };
 /**
  * @description add a package
- * @param {object} req 
+ * @param {object} req.body
  */
 const addPackage = async (req, res) => {
   try {
@@ -80,7 +79,8 @@ const addPackage = async (req, res) => {
 };
 /**
  * @description update a package by id
- * @param {object} req 
+ * @param {object} req.body
+ * @param {String} req.params.ID
  */
 const updatePackageById = async (req, res) => {
     let body=req.body
@@ -95,7 +95,7 @@ const updatePackageById = async (req, res) => {
 };
 /**
  * @description delete a package by id
- * @param {object} req 
+ * @param {String} req.params.ID
  */
 const deletePackage = async (req, res) => {
   try {
@@ -105,7 +105,7 @@ const deletePackage = async (req, res) => {
       });
       deletedPackage.then({
         function(success) {
-          return res.status(200).semd({ success: true, message: "This package has been deleted" });
+          return res.status(200).semd({ success: true, message: "This package deleted successfully" });
         },
         function(reject) {
           return res.status(412).send({

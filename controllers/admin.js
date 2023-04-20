@@ -112,12 +112,16 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '4h'}
     );
-    res.status(200).send({success:true, data:token, role:"user"});
+    let role;
+    if(loggingUser.isSuper){role="superAdmin"}else{role="admin"}
+    res.status(200).send({success:true, data:token, id:loggingUser._id, role:role});
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error");
   }
 };
-
-const controller = { addAdmin, getAll, deleteAdminById, getById, editAdminById, login };
+export const test=(req, res)=>{
+  res.send({success:true, message:"passed!"})
+}
+const controller = { addAdmin, getAll, deleteAdminById, getById, editAdminById, login, test };
 export default controller;

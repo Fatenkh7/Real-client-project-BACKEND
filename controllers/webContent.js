@@ -2,7 +2,6 @@ import webContentModel from "../models/WebContent.js";
 
 /**
  * @description get all the web content
- * @param req.body JSON
  */
 export async function getAll(req, res, next) {
   try {
@@ -15,7 +14,7 @@ export async function getAll(req, res, next) {
 
 /**
  * @description get web content by id
- * @param req.body JSON
+ * @param {String} req.params.ID
  */
 export async function getById(req, res, next) {
   try {
@@ -34,19 +33,16 @@ export async function getById(req, res, next) {
 
 /**
  * @description add web content
- * @param req.body JSON
+ * @param {Object} req.body
  */
 export async function addWebContent(req, res, next) {
   try {
     const { key, value } = req.body;
-
     const newContent = new webContentModel({
       key,
       value,
     });
-
     await newContent.save();
-
     res
       .status(201)
       .json({ message: "Web content created successfully", newContent });
@@ -57,13 +53,12 @@ export async function addWebContent(req, res, next) {
 
 /**
  * @description update web content by id
- * @param req.body JSON
+ * @param {String} req.params.ID
  */
 export async function editWebContentById(req, res) {
   try {
     let filter = { _id: req.params.ID };
     let update = req.body;
-
     const updateContent = await webContentModel.findOneAndUpdate(
       filter,
       update,
@@ -82,7 +77,7 @@ export async function editWebContentById(req, res) {
 
 /**
  * @description delete web content by id
- * @param req.body JSON
+ * @param {String} req.params.ID
  */
 export async function deleteWebContentById(req, res, next) {
   try {
