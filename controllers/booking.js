@@ -37,13 +37,13 @@ export async function getById(req, res, next) {
  */
 export async function addBooking(req, res, next) {
   try {
-    const { User_id, Package_id, Partner_id, TypeTravel_id, price, currency } =
+    const {idUser,idPackage, idPartner, idTypeTravel, price, currency } =
       req.body;
     const newBooking = new bookingModel({
-      User_id,
-      Package_id,
-      Partner_id,
-      TypeTravel_id,
+      idUser,
+      idPackage,
+      idPartner,
+      idTypeTravel,
       price,
       currency,
     });

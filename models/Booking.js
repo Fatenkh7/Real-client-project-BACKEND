@@ -5,18 +5,23 @@ const BookingSchema = Schema(
     idUser: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: [true, "Please enter the user"],
+
     },
     idPackage: {
       type: Schema.Types.ObjectId,
       ref: "Package",
+      required: [true, "Please enter the package"],
     },
     idPartner: {
       type: Schema.Types.ObjectId,
       ref: "Partner",
+      required: [true, "Please enter the partner"],
     },
     idTypeTravel: {
       type: Schema.Types.ObjectId,
       ref: "TypeTravel",
+      required: [true, "Please enter the type of the travel"],
     },
     price: {
       type: Schema.Types.Decimal128,
