@@ -36,7 +36,7 @@ export async function getById(req, res, next) {
  * @description add a booking
  * @param {object} req.body
  */
- */export async function addBooking(req, res, next) {
+export async function addBooking(req, res, next) {
   try {
     const {idUser,idPackage, idPartner, idTypeTravel, price, currency } =
       req.body;
