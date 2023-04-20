@@ -2,7 +2,7 @@ import bookingModel from "../models/Booking.js";
 
 /**
  * @description get all booking
- * @param {object} req
+ * @param {object} req 
  */
 export async function getAll(req, res, next) {
   try {
@@ -14,7 +14,7 @@ export async function getAll(req, res, next) {
 }
 
 /**
- * @description get booking by id * @param {object} req
+ * @description get booking by id * @param {object} req 
  */
 export async function getById(req, res, next) {
   try {
@@ -33,23 +33,21 @@ export async function getById(req, res, next) {
 
 /**
  * @description add a booking
- * @param {object} req
- */ export async function addBooking(req, res, next) {
+ * @param {object} req 
+ */export async function addBooking(req, res, next) {
   try {
     const {idUser,idPackage, idPartner, idTypeTravel, price, currency } =
       req.body;
-    const newBooking = new bookingModel({
-      idUser,
-      idPackage,
-      idPartner,
-      idTypeTravel,
-      price,
-      currency,
-    });
+      const newBooking = await bookingModel({
+        idUser,
+        idPackage,
+        idPartner,
+        idTypeTravel,
+        price,
+        currency,})
     console.log(newBooking);
     console.log(idUser);
     await newBooking.save();
-
     res
       .status(201)
       .json({ message: "Booking created successfully", newBooking });
@@ -60,7 +58,7 @@ export async function getById(req, res, next) {
 
 /**
  * @description update booking by id
- * @param {object} req
+ * @param {object} req 
  */
 export async function editBookingById(req, res) {
   try {
@@ -81,8 +79,8 @@ export async function editBookingById(req, res) {
 
 /**
  * @description delete booking by id
- * @param {object} req
- */ export async function deleteBookingById(req, res, next) {
+ * @param {object} req 
+ */export async function deleteBookingById(req, res, next) {
   try {
     const removeBooking = await bookingModel.findOneAndDelete({
       _id: req.params.ID,
