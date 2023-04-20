@@ -2,19 +2,20 @@ import bookingModel from "../models/Booking.js";
 
 /**
  * @description get all booking
- * @param {object} req
+ * @param {object} req 
  */
 export async function getAll(req, res, next) {
   try {
     const response = await bookingModel.find({});
-    return res.status(200).send({ success: true, response });
+    return res.status(200).send({ success: true, data: response });
   } catch (err) {
     return next(err);
   }
 }
 
 /**
- * @description get booking by id * @param {object} req
+ * @description get booking by id
+ * @param {String} req.params.ID
  */
 export async function getById(req, res, next) {
   try {
@@ -33,23 +34,20 @@ export async function getById(req, res, next) {
 
 /**
  * @description add a booking
- * @param {object} req
- */ export async function addBooking(req, res, next) {
+ * @param {object} req.body
+ */
+ */export async function addBooking(req, res, next) {
   try {
     const {idUser,idPackage, idPartner, idTypeTravel, price, currency } =
       req.body;
-    const newBooking = new bookingModel({
-      idUser,
-      idPackage,
-      idPartner,
-      idTypeTravel,
-      price,
-      currency,
-    });
-    console.log(newBooking);
-    console.log(idUser);
+      const newBooking = await bookingModel({
+        idUser,
+        idPackage,
+        idPartner,
+        idTypeTravel,
+        price,
+        currency,})
     await newBooking.save();
-
     res
       .status(201)
       .json({ message: "Booking created successfully", newBooking });
@@ -60,13 +58,12 @@ export async function getById(req, res, next) {
 
 /**
  * @description update booking by id
- * @param {object} req
+ * @param {String} req.params.ID
  */
 export async function editBookingById(req, res) {
   try {
     let filter = { _id: req.params.ID };
     let update = req.body;
-
     const updateBooking = await bookingModel.findOneAndUpdate(filter, update, {
       //for save it in the database
       new: true,
@@ -81,8 +78,8 @@ export async function editBookingById(req, res) {
 
 /**
  * @description delete booking by id
- * @param {object} req
- */ export async function deleteBookingById(req, res, next) {
+ * @param {String} req.params.ID
+ */export async function deleteBookingById(req, res, next) {
   try {
     const removeBooking = await bookingModel.findOneAndDelete({
       _id: req.params.ID,

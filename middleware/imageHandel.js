@@ -14,7 +14,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
+/**
+ * @description Image upload middleware. In order to work, sent request body must have:
+ * {image: `${file}`}
+ * @param {Array} role
+ * @param {object} req
+ * 
+ */
 export default function (req, res, next) {
   upload.single("image")(req, res, (err) => {
     try {

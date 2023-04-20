@@ -1,12 +1,11 @@
 import { Schema, model } from "mongoose";
 
-const BookingSchema = Schema(
+const BookingSchema = new Schema(
   {
     idUser: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: [true, "Please enter the user"],
-
     },
     idPackage: {
       type: Schema.Types.ObjectId,
@@ -25,7 +24,6 @@ const BookingSchema = Schema(
     },
     price: {
       type: Schema.Types.Decimal128,
-      default: false,
       required: [true, "Please enter the price"],
     },
     currency: {
@@ -39,8 +37,12 @@ const BookingSchema = Schema(
     timestamps: true,
   }
 );
-BookingSchema.pre(["find", "findOne"], function () {
-  this.populate(["idUser", "idPackage", "idPartner", "idTypeTravel"]);
+
+BookingSchema.pre("find", function (next) {
+  this.populate("idUser").populate("idPackage").populate("idPartner").populate("idTypeTravel");
+  next();
 });
-const Model = model("Booking", BookingSchema);
-export default Model;
+
+const BookingModel = model("Booking", BookingSchema);
+
+export default BookingModel;

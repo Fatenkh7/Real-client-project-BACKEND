@@ -1,4 +1,7 @@
 import bookMeetingModel from "../models/BookingMeeting.js";
+/**
+ * @description get all booking meeting
+ */
 const getAllBookMeetings = async (req, res) => {
     try {
         const bookMeeting = await bookMeetingModel.find({});
@@ -7,6 +10,10 @@ const getAllBookMeetings = async (req, res) => {
         return res.status(412).send({error:true, message:"There is a problem retreiving the book meeting data"})
       }
 };
+/**
+ * @description get a booking meeting by id
+ * @param {String} req.params.ID
+ */
 const getBookMeetingById = async (req, res) => {
     try {
         const bookMeeting = await bookMeetingModel.find({_id:req.params.ID});
@@ -15,6 +22,10 @@ const getBookMeetingById = async (req, res) => {
         return res.status(412).send({error:true, message:"There is a problem retreiving the book meeting data"})
       }
 };
+/**
+ * @description add a new booking meeting
+ * @param {Object} req.body
+ */
 const addBookMeeting = async (req, res) => {
   try {
     const {datetime, idUser, isGuest, idAdmin}=req.body
@@ -42,7 +53,11 @@ const addBookMeeting = async (req, res) => {
     return res.status(412).send({ error: true, message: "There is a problem validating the data" ,data:error.message });
   }
 };
-
+/**
+ * @description update a booking meeting by id
+ * @param {object} req.body
+ * @param {String} req.params.ID
+ */
 const updateBookMeetingById = async (req, res) => {
     let body=req.body
     try{
@@ -54,6 +69,11 @@ const updateBookMeetingById = async (req, res) => {
 
 }
 };
+/**
+ * @description delete a booking meeting by id
+ * @param {object} req 
+ * @param {String} req.params.ID
+ */
 const deleteBookMeeting = async (req, res) => {
   try {
     const deletedbookMeeting = await bookMeetingModel

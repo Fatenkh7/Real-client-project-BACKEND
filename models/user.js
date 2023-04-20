@@ -17,6 +17,17 @@ const user = new Schema(
       type:Boolean,
       default:false
     },
+    createDate:{
+      type:Date,
+    },
+    isConfirmed:{
+      type:Boolean,
+      default:true
+    },
+    points:{
+      type:Number,
+      default:0
+    },
     email: {
       type: String,
       trim: true,

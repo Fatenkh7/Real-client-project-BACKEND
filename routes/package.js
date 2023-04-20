@@ -2,7 +2,7 @@ import express from 'express';
 import auth from "../middleware/auth.js";
 const router = express.Router();
 import packageControllers from "../controllers/package.js"
-router.get("/",auth(["superAdmin", "admin"]), packageControllers.getAllPackages);
+router.get("/", packageControllers.getAllPackages);
 router.get("/:ID",auth(["superAdmin", "admin"]), packageControllers.getPackageById);
 router.post("/add",auth(["superAdmin", "admin"]), packageControllers.addPackage);
 router.patch("/:ID",auth(["superAdmin", "admin"]), packageControllers.updatePackageById);
