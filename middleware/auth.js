@@ -28,7 +28,7 @@ export const authorize = (role = []) => {
           });
       }
       try {
-        let reqRole = req.headers.role || "none";
+        let reqRole = decoded.role || "none";
         if (role.includes(reqRole)) {
           if (reqRole === "admin" || reqRole === "superAdmin") {
             let id = req.headers.id || "none";
@@ -67,7 +67,7 @@ export const authorize = (role = []) => {
             );
           } else if (reqRole === "user") {
             try {
-              let id = req.headers.id || "none";
+              let id = decoded.id || "none";
               userModel.find({ _id: id }).then(
                 function (success) {
                   if (success.length === 0) {

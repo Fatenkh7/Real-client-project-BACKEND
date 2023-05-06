@@ -38,7 +38,7 @@ export async function getById(req, res, next) {
  */
 export async function addAdmin(req, res, next) {
   try {
-    const { firstName, lastName, userName, email, password, isSuper } =
+    const { firstName, lastName, userName, email, password, isSuper,imageId } =
       req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const admin = new adminModel({
@@ -48,6 +48,7 @@ export async function addAdmin(req, res, next) {
       email,
       password: hashedPassword,
       isSuper,
+      imageId,
     });
 
     await admin.save();

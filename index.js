@@ -2,19 +2,20 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
-import cors from "cors"
+import cors from "cors";
 import createError from "http-errors";
 import cookieParser from "cookie-parser";
 import typeTravelRoutes from "./routes/typeTravel.js";
 import bodyParser from "body-parser";
 import adminRoutes from "./routes/admin.js";
 import partnerTypeRoutes from "./routes/partnerType.js";
-import bookingMeetingRoutes from "./routes/bookingmeeting.js"
+import bookingMeetingRoutes from "./routes/bookingmeeting.js";
 import partnerRoutes from "./routes/partner.js";
 import userRoutes from "./routes/user.js";
 import packageRoutes from "./routes/package.js";
 import bookingRoutes from "./routes/booking.js";
 import webContentRoutes from "./routes/webContent.js";
+import newsRoutes from "./routes/news.js";
 import inboxRoutes from "./routes/inbox.js";
 import imageRoutes from "./routes/image.js";
 
@@ -23,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,12 +41,13 @@ app.get("/", (req, res) => {
 app.use("/typeTravel", typeTravelRoutes);
 app.use("/admin", adminRoutes);
 app.use("/partnertype", partnerTypeRoutes);
-app.use("/bookingmeeting", bookingMeetingRoutes)
+app.use("/bookingmeeting", bookingMeetingRoutes);
 app.use("/partner", partnerRoutes);
 app.use("/user", userRoutes);
 app.use("/package", packageRoutes);
 app.use("/booking", bookingRoutes);
 app.use("/content", webContentRoutes);
+app.use("/news", newsRoutes);
 app.use("/inbox", inboxRoutes);
 app.use("/image", imageRoutes);
 
@@ -58,7 +60,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log(err)
+  console.log(err);
   res.status(err.status || 500).send({
     success: false,
     message: err.message,

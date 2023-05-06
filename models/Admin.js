@@ -40,9 +40,10 @@ const adminSchema = Schema(
       type: Boolean,
       default: false,
     },
-    idImage: {
+    imageId: {
       type: Schema.Types.ObjectId,
       ref: "Image",
+      required: [true, "Please enter your image"],
     },
   },
   {
@@ -50,7 +51,7 @@ const adminSchema = Schema(
   }
 );
 adminSchema.pre(["find", "findOne"], function () {
-  this.populate(["idImage"]);
+  this.populate(["imageId"]);
 });
 const Model = model("Admin", adminSchema);
 export default Model;
