@@ -28,7 +28,7 @@ const getPackageById = async (req, res) => {
  */
 const addPackage = async (req, res) => {
   try {
-    const {description, idImage, packageTitle, locations, duration, isCustomized}=req.body
+    const {description, idImage, packageTitle, locations, duration, isCustomized, idCustomer}=req.body
     if(!isCustomized){
     const newPackage = new packageModel({
         description, idImage, packageTitle, locations, duration, isCustomized

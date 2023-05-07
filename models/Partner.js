@@ -29,6 +29,10 @@ const partnerSchema = Schema(
       trim: true,
       required: [true, "Please enter the company's link"],
     },
+    idImage:{
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+    }
   },
   {
     collection: "Partner",

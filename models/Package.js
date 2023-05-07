@@ -9,7 +9,7 @@ const packageSchema = new Schema(
     idImage: {
       type: Schema.Types.ObjectId,
       //required: true,
-      //ref:"Image"
+      ref:"Image"
     },
     description: {
       type: String,
