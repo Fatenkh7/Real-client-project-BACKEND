@@ -5,7 +5,7 @@ import { getAll, getById, addAdmin, deleteAdminById, editAdminById, login, test 
 router.get("/", auth(["superAdmin"]),getAll);
 router.get("/:ID", auth(["superAdmin", "admin"]), getById);
 router.post("/add", addAdmin);
-router.patch("/:ID", auth(["superAdmin", "admin"]), editAdminById);
+router.put("/:ID", auth(["superAdmin", "admin"]), editAdminById);
 router.delete("/:ID",auth(["superAdmin"]), deleteAdminById);
 router.post("/login", login);
 router.post("/testAdmin",auth(["admin"]), test);
