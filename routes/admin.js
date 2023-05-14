@@ -10,9 +10,9 @@ import {
   login,
   test,
 } from "../controllers/admin.js";
-router.get("/", auth(["superAdmin"]), getAll);
+router.get("/", auth(["superAdmin", "admin"]), getAll);
 router.get("/:ID", auth(["superAdmin", "admin"]), getById);
-router.post("/add", auth(["superAdmin"]), addAdmin);
+router.post("/add", addAdmin);
 router.put("/:ID", auth(["superAdmin", "admin"]), editAdminById);
 router.delete("/:ID", auth(["superAdmin"]), deleteAdminById);
 router.post("/login", login);

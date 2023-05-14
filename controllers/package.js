@@ -28,7 +28,8 @@ const getPackageById = async (req, res) => {
  */
 const addPackage = async (req, res) => {
   try {
-    const {description, idImage, packageTitle, locations, duration, isCustomized, idCustomer}=req.body
+    console.log("fghjk", req.body)
+    const {description, idImage, packageTitle, locations, duration, isCustomized}=req.body
     if(!isCustomized){
     const newPackage = new packageModel({
         description, idImage, packageTitle, locations, duration, isCustomized
@@ -45,7 +46,7 @@ const addPackage = async (req, res) => {
           .status(410)
           .send({
             error: true,
-            message: "There is a problem adding the new package",
+            message: "There is a hhhhhhhhhhhhhhhhhhhh problem adding the new package",
             data: reject,
           });
       }

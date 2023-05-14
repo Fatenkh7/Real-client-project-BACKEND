@@ -56,14 +56,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  console.log(err)
-  res.status(err.status || 500).send({
-    success: false,
-    message: err.message,
-  });
-});
+
 
 connectDB()
   .then(() => {
@@ -77,3 +70,11 @@ connectDB()
     console.error(err);
     process.exit(1);
   });
+// error handler
+app.use(function (err, req, res, next) {
+  console.log(err)
+  res.status(err.status || 500).send({
+    success: false,
+    message: err.message,
+  });
+});

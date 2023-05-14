@@ -5,6 +5,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, "uploads/");
   },
+
   filename: function (req, file, callback) {
     const extension = file.mimetype.split("/")[1];
     const filename = `${file.fieldname}-${Date.now()}.${extension}`;
@@ -30,6 +31,7 @@ export default function (req, res, next) {
       if (!req.file) {
         throw new Error("Please select a file to upload");
       }
+      console.log("bataaaaataaaaaaaaaaaa handler")
       req.imagePath = req.file.path;
       next();
     } catch (err) {

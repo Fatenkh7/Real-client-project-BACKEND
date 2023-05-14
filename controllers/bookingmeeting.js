@@ -26,12 +26,39 @@ const getBookMeetingById = async (req, res) => {
  * @description add a new booking meeting
  * @param {Object} req.body
  */
+const addBookMeetingGuest = async (req, res) => {
+  try {
+    const {fullName, isGuest, email}=req.body
+          const newbookMeeting = new bookMeetingModel(
+            req.body
+        );
+        await newbookMeeting.save().then(
+          function (success) {
+            return res
+              .status(201)
+              .json({ success: true, message: "book meeting added successfully" });
+          },
+          function (reject) {
+            return res
+              .status(410)
+              .send({
+                error: true,
+                message: "There is a problem adding the new book meeting",
+                data: reject,
+              });
+          }
+        );
+    
+  } catch (error) {
+    return res.status(412).send({ error: true, message: "There is a problem validating the data" ,data:error.message });
+  }
+};
 const addBookMeeting = async (req, res) => {
   try {
-    const {datetime, idUser, isGuest, idAdmin}=req.body
-          const newbookMeeting = new bookMeetingModel({
-            datetime, idUser, isGuest, idAdmin
-        });
+    const {fullName, isGuest, email}=req.body
+          const newbookMeeting = new bookMeetingModel(
+            req.body
+        );
         await newbookMeeting.save().then(
           function (success) {
             return res
@@ -104,6 +131,7 @@ const deleteBookMeeting = async (req, res) => {
 const controllers = {
   getAllBookMeetings,
   getBookMeetingById,
+  addBookMeetingGuest,
   addBookMeeting,
   updateBookMeetingById,
   deleteBookMeeting
